@@ -68,4 +68,42 @@ class RentalController extends Controller
 
         return redirect()->route('rentals.index')->with('error', 'Car already returned.');
     }
+
+    public function showRentalForm(Car $car)
+    {
+        return view('rentals.form', compact('car'));
+    }
+
+    public function submitRentalForm(Request $request)
+    {
+        $request->validate([
+            'car_id' => 'required|exists:cars,id',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
+        ]);
+
+        $rental = new Rental();
+        $rental->user_id = Auth::id();
+        $rental->car_id = $request->car_id;
+        $rental->start_date = $request->start_date;
+        $rental->end_date = $request->end_date;
+        $rental->save();
+
+        return redirect()->route('home')->with('success', 'Rental mobil berhasil.');
+    }
+
+    public function returnRental($id)
+    {
+        $rental = Rental::where('id', $id)->where('user_id', Auth::id())->first();
+
+        if (!$rental) {
+            return redirect()->back()->with('error', 'Hmm, terjadi kesalahan. Silahkan coba lagi.');
+        }
+
+        $rental->return_date = now();
+        $rental->status = 'completed';
+        $rental->save();
+
+        return redirect()->back()->with('success', 'Mobil berhasil dikembalikan.');
+    }
 }

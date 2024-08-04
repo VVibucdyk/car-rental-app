@@ -3,6 +3,7 @@
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RentalController;
+use App\Livewire\RentalForm;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -34,5 +35,10 @@ Route::resource('cars', CarController::class);
 
 Route::resource('rentals', RentalController::class)->middleware('auth')->except(['edit', 'update', 'destroy']);
 Route::post('rentals/{id}/return', [RentalController::class, 'returnCar'])->middleware('auth')->name('rentals.return');
+
+Route::get('/rental/form/{car}', RentalForm::class)->name('rental.form')->middleware('auth');
+Route::post('/rental/submit', [RentalController::class, 'submitRentalForm'])->name('rental.submit')->middleware('auth');
+
+Route::post('/rental/return/{id}', [RentalController::class, 'returnRental'])->name('rental.return');
 
 require __DIR__.'/auth.php';

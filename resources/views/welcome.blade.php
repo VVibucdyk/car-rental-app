@@ -11,6 +11,7 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
 
         @vite('resources/css/app.css')
+        @livewireStyles
     </head>
     <body class="antialiased">
         <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-center selection:bg-red-500 selection:text-white">
@@ -34,6 +35,30 @@
                     <img width="128px" height="128px" src="{{ url("img/logo.jpg") }}" alt="">
                 </div>
 
+                @if (session()->has('error'))
+                <div class="flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert">
+                        <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                        </svg>
+                        <span class="sr-only">Info</span>
+                        <div>
+                          {{ session('error') }}
+                        </div>
+                    </div>
+                @endif
+
+                @if (session()->has('success'))
+                    <div class="flex items-center p-4 mb-4 text-sm text-blue-800 border border-blue-300 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800" role="alert">
+                        <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                        </svg>
+                        <span class="sr-only">Info</span>
+                        <div>
+                          {{ session('success') }}
+                        </div>
+                    </div>
+                @endif
+
                 <div class="font-sans text-black bg-white flex items-center justify-center">
                     <div class="border rounded overflow-hidden flex">
                       <input type="text" class="px-4 py-2" placeholder="Search...">
@@ -44,147 +69,22 @@
                 </div>
 
                 <div class="mt-16">
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 lg:gap-8">
-                        
-                        <!-- Article -->
-                        <article class="overflow-hidden rounded-lg shadow-lg">
-
-                            <a href="#">
-                                <img alt="Placeholder" class="block h-auto w-full" src="https://picsum.photos/600/400/?random">
-                            </a>
-
-                            <header class="flex items-center justify-between leading-tight p-2 md:p-4">
-                                <h1 class="text-lg">
-                                    <a class="no-underline hover:underline text-black" href="#">
-                                        Article Title
-                                    </a>
-                                </h1>
-                                <p class="text-grey-darker text-sm">
-                                    11/1/19
-                                </p>
-                            </header>
-
-                            <footer class="flex items-center justify-between leading-none p-2 md:p-4">
-                                <a class="flex items-center no-underline hover:underline text-black" href="#">
-                                    <img alt="Placeholder" class="block rounded-full" src="https://picsum.photos/32/32/?random">
-                                    <p class="ml-2 text-sm">
-                                        Author Name
-                                    </p>
-                                </a>
-                                <a class="no-underline text-grey-darker hover:text-red-dark" href="#">
-                                    <span class="hidden">Like</span>
-                                    <i class="fa fa-heart"></i>
-                                </a>
-                            </footer>
-
-                        </article>
-                        <!-- END Article -->
-
-                        <!-- Article -->
-                        <article class="overflow-hidden rounded-lg shadow-lg">
-
-                            <a href="#">
-                                <img alt="Placeholder" class="block h-auto w-full" src="https://picsum.photos/600/400/?random">
-                            </a>
-
-                            <header class="flex items-center justify-between leading-tight p-2 md:p-4">
-                                <h1 class="text-lg">
-                                    <a class="no-underline hover:underline text-black" href="#">
-                                        Article Title
-                                    </a>
-                                </h1>
-                                <p class="text-grey-darker text-sm">
-                                    11/1/19
-                                </p>
-                            </header>
-
-                            <footer class="flex items-center justify-between leading-none p-2 md:p-4">
-                                <a class="flex items-center no-underline hover:underline text-black" href="#">
-                                    <img alt="Placeholder" class="block rounded-full" src="https://picsum.photos/32/32/?random">
-                                    <p class="ml-2 text-sm">
-                                        Author Name
-                                    </p>
-                                </a>
-                                <a class="no-underline text-grey-darker hover:text-red-dark" href="#">
-                                    <span class="hidden">Like</span>
-                                    <i class="fa fa-heart"></i>
-                                </a>
-                            </footer>
-
-                        </article>
-                        <!-- END Article -->
-
-                        <!-- Article -->
-                        <article class="overflow-hidden rounded-lg shadow-lg">
-
-                            <a href="#">
-                                <img alt="Placeholder" class="block h-auto w-full" src="https://picsum.photos/600/400/?random">
-                            </a>
-
-                            <header class="flex items-center justify-between leading-tight p-2 md:p-4">
-                                <h1 class="text-lg">
-                                    <a class="no-underline hover:underline text-black" href="#">
-                                        Article Title
-                                    </a>
-                                </h1>
-                                <p class="text-grey-darker text-sm">
-                                    11/1/19
-                                </p>
-                            </header>
-
-                            <footer class="flex items-center justify-between leading-none p-2 md:p-4">
-                                <a class="flex items-center no-underline hover:underline text-black" href="#">
-                                    <img alt="Placeholder" class="block rounded-full" src="https://picsum.photos/32/32/?random">
-                                    <p class="ml-2 text-sm">
-                                        Author Name
-                                    </p>
-                                </a>
-                                <a class="no-underline text-grey-darker hover:text-red-dark" href="#">
-                                    <span class="hidden">Like</span>
-                                    <i class="fa fa-heart"></i>
-                                </a>
-                            </footer>
-
-                        </article>
-                        <!-- END Article -->
-
-                        <!-- Article -->
-                        <article class="overflow-hidden rounded-lg shadow-lg">
-
-                            <a href="#">
-                                <img alt="Placeholder" class="block h-auto w-full" src="https://picsum.photos/600/400/?random">
-                            </a>
-
-                            <header class="flex items-center justify-between leading-tight p-2 md:p-4">
-                                <h1 class="text-lg">
-                                    <a class="no-underline hover:underline text-black" href="#">
-                                        Article Title
-                                    </a>
-                                </h1>
-                                <p class="text-grey-darker text-sm">
-                                    11/1/19
-                                </p>
-                            </header>
-
-                            <footer class="flex items-center justify-between leading-none p-2 md:p-4">
-                                <a class="flex items-center no-underline hover:underline text-black" href="#">
-                                    <img alt="Placeholder" class="block rounded-full" src="https://picsum.photos/32/32/?random">
-                                    <p class="ml-2 text-sm">
-                                        Author Name
-                                    </p>
-                                </a>
-                                <a class="no-underline text-grey-darker hover:text-red-dark" href="#">
-                                    <span class="hidden">Like</span>
-                                    <i class="fa fa-heart"></i>
-                                </a>
-                            </footer>
-
-                        </article>
-                        <!-- END Article -->
-
-                    </div>
+                    @livewire('available-cars')
                 </div>
+
+                @auth
+                    <div id="ListRented" class="mt-16">
+                        @livewire('rented-cars')
+                    </div>
+                @endauth
+
+                @auth
+                    <div id="HistoryRented" class="mt-16">
+                        
+                    </div>
+                @endauth
             </div>
         </div>
+        @livewireScripts
     </body>
 </html>
