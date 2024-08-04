@@ -16,6 +16,12 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
+                    @if (Auth::user()->hasRole('admin'))
+                    <x-nav-link :href="route('cars.index')" :active="request()->routeIs('cars.index')">
+                        {{ __('Mobil') }}
+                    </x-nav-link>
+                    @endif
+
                     <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                         {{ __('Rental') }}
                     </x-nav-link>

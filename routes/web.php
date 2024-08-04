@@ -4,6 +4,7 @@ use App\Http\Controllers\CarController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RentalController;
 use App\Livewire\RentalForm;
+use App\Models\Rental;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,7 +23,14 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $rentals = Rental::
+            join('users', 'users.id', '=', 'rentals.user_id')
+            ->join('cars', 'cars.id', '=', 'rentals.car_id')
+            ->select('rentals.*', 'cars.brand', 'cars.model', 'cars.daily_rate', 'cars.license_plate', 'cars.available', 'users.name', 'users.address')
+            ->with('car')
+            ->orderBy('id', 'desc')
+            ->get();
+    return view('dashboard', ['rentals' => $rentals]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

@@ -1,36 +1,46 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Edit Car</title>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Ubah Data Mobil') }}
+        </h2>
+    </x-slot>
 
-    @vite('resources/css/app.css')
-</head>
-<body>
-    <h1>Edit Car</h1>
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg sm:p-6 lg:p-8">
 
-    <form action="{{ route('cars.update', $car->id) }}" method="POST">
-        @csrf
-        @method('PUT')
+                <div class="w-full">
+                    <h2 class="text-center text-blue-400 font-bold text-2xl uppercase mb-10">Update</h2>
+                    <div class="bg-white p-10 rounded-lg shadow md:w-3/4 mx-auto lg:w-1/2">
+                        <form action="{{ route('cars.update', $car->id) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <div class="mb-5">
+                                <label for="brand" class="block mb-2 font-bold text-gray-600">Merk</label>
+                                <input value="{{ $car->brand }}" class="border border-gray-300 shadow p-3 w-full rounded mb-" type="text" id="brand" name="brand" required><br>
+                            </div>
 
-        <label for="brand">Brand:</label>
-        <input type="text" id="brand" name="brand" value="{{ $car->brand }}" required><br>
+                            <div class="mb-5">
+                                <label for="model" class="block mb-2 font-bold text-gray-600">Model</label>
+                                <input value="{{ $car->model }}" class="border border-gray-300 shadow p-3 w-full rounded mb-" type="text" id="model" name="model" required><br>
+                            </div>
 
-        <label for="model">Model:</label>
-        <input type="text" id="model" name="model" value="{{ $car->model }}" required><br>
+                            <div class="mb-5">
+                                <label for="license_plate" class="block mb-2 font-bold text-gray-600">Nomor Kendaraan</label>
+                                <input value="{{ $car->license_plate }}" class="border border-gray-300 shadow p-3 w-full rounded mb-" type="text" id="license_plate" name="license_plate" required><br>
+                            </div>
 
-        <label for="license_plate">License Plate:</label>
-        <input type="text" id="license_plate" name="license_plate" value="{{ $car->license_plate }}" required><br>
+                            <div class="mb-5">
+                                <label for="daily_rate" class="block mb-2 font-bold text-gray-600">Biaya/Hari</label>
+                                <input value="{{ $car->daily_rate }}" class="border border-gray-300 shadow p-3 w-full rounded mb-" type="text" id="daily_rate" name="daily_rate" required><br>
+                            </div>
 
-        <label for="daily_rate">Daily Rate:</label>
-        <input type="number" id="daily_rate" name="daily_rate" value="{{ $car->daily_rate }}" step="0.01" required><br>
-
-        <button type="submit">Update</button>
-    </form>
-
-    <a href="{{ route('cars.index') }}">Back to List</a>
-</body>
-</html>
+                            <button type="submit" class="block w-full bg-blue-500 text-white font-bold p-4 rounded-lg">Update</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</x-app-layout>

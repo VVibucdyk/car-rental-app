@@ -32,10 +32,18 @@ class Rental extends Model
     {
         return $this->belongsTo(Car::class);
     }
-
-    // Aksesori untuk menghitung durasi sewa
-    public function getDurationAttribute()
+    // Accessor for totalDays
+    public function getTotalDaysAttribute()
     {
-        return $this->end_date->diffInDays($this->start_date);
+        $start = \Carbon\Carbon::parse($this->start_date);
+        $end = \Carbon\Carbon::parse($this->end_date);
+
+        return $end->diffInDays($start) + 1; // Include the start day
+    }
+
+    // Accessor for totalCost
+    public function getTotalCostAttribute()
+    {
+        return $this->total_days * $this->car->daily_rate;
     }
 }
