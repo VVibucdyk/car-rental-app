@@ -1,6 +1,6 @@
 <div>
-    @if (empty($availableCars))
-        <h1>Available Cars for Rent</h1>
+    @if (!empty($availableCars))
+        <h1 class="font-bold text-2xl mb-3">Mobil Siap Untuk Rental</h1>
     @endif
     <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
         @forelse ($availableCars as $car)
@@ -34,11 +34,13 @@
             <footer class="flex items-center justify-between leading-none px-2 md:px-4 py-2">
                 @if(auth()->user() && auth()->user()->role !== 'admin')
                 <a href="{{ route('rental.form', $car->id) }}" class="col-span-12 text-center rounded-lg px-4 py-2 bg-orange-400 text-orange-100 w-full hover:bg-orange-600 duration-300">Rental</a>
+                @else
+                <a href="{{ route('login') }}" class="col-span-12 text-center rounded-lg px-4 py-2 bg-orange-400 text-orange-100 w-full hover:bg-orange-600 duration-300">Rental</a>
                 @endif
             </footer>
         </article>
         @empty
-            <div class="col-span-12">Mobil sudah dirental semua :(.</div>
+            <h2 class="font-bold text-2xl text-center">Mobil sudah dirental semua :(.</h2>
         @endforelse
     </div>
 </div>

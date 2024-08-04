@@ -1,8 +1,8 @@
 <div>
     @if($rentals->isEmpty())
-        <p>Kamu Belum Rental Mobil</p>
+        <h2 class="font-bold text-2xl mb-3">Kamu Belum Rental Mobil</h2>
     @else
-        <h2>History Rental Kamu</h2>
+        <h2 class="font-bold text-2xl mb-3">History Aktifitas Rental Kamu</h2>
         @foreach($rentals as $rental)
             @if ($rental->status == 'completed')
                 <!-- start  -->
@@ -11,9 +11,10 @@
                         <div class="space-y-1 border-r-2 pr-3">
                             <div class="text-sm leading-5 font-semibold"><span class="text-xs leading-4 font-normal text-gray-500"> No Rental #</span> {{ $rental->id }} </div>
                             <div class="text-sm leading-5 font-semibold"><span class="text-xs leading-4 font-normal text-gray-500 pr"> Tanggal Rental :</span> {{ $rental->start_date }} </div>
-                            <div class="text-sm leading-5 font-semibold"><span class="text-xs leading-4 font-normal text-gray-500 pr"> Tanggal Selesai :</span> {{ $rental->end_date }} </div>
+                            <div class="text-sm leading-5 font-semibold"><span class="text-xs leading-4 font-normal text-gray-500 pr"> Tanggal Sampai :</span> {{ $rental->end_date }} </div>
                             <div class="text-sm leading-5 font-semibold">Total Hari : {{ number_format($this->calculateTotalDays($rental), 0, ',', '.') }} Hari</div>
                             <div class="text-sm leading-5 font-semibold">Total : Rp. {{ number_format($this->calculateTotalCost($rental), 0, ',', '.') }}</div>
+                            <div class="text-sm leading-5 font-semibold">Tanggal Diselesaikan : {{ $rental->return_date }}</div>
                         </div>
                         <div class="flex-1">
                             <div class="ml-3 space-y-1 border-r-2 pr-3">
@@ -47,7 +48,7 @@
                         <div class="space-y-1 border-r-2 pr-3">
                             <div class="text-sm leading-5 font-semibold"><span class="text-xs leading-4 font-normal text-gray-500"> No Rental #</span> {{ $rental->id }} </div>
                             <div class="text-sm leading-5 font-semibold"><span class="text-xs leading-4 font-normal text-gray-500 pr"> Tanggal Rental :</span> {{ $rental->start_date }} </div>
-                            <div class="text-sm leading-5 font-semibold"><span class="text-xs leading-4 font-normal text-gray-500 pr"> Tanggal Selesai :</span> {{ $rental->end_date }} </div>
+                            <div class="text-sm leading-5 font-semibold"><span class="text-xs leading-4 font-normal text-gray-500 pr"> Tanggal Sampai :</span> {{ $rental->end_date }} </div>
                             <div class="text-sm leading-5 font-semibold">Total Hari : {{ number_format($this->calculateTotalDays($rental), 0, ',', '.') }} Hari</div>
                             <div class="text-sm leading-5 font-semibold">Total : Rp. {{ number_format($this->calculateTotalCost($rental), 0, ',', '.') }}</div>
                         </div>
